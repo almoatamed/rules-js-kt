@@ -1,6 +1,6 @@
 {
   "name": "rules-js-kt",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A tiny TypeScript library of validator rule factories for forms — returns `true` for valid values or an error string for invalid values.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

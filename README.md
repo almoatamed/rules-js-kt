@@ -52,6 +52,26 @@ The `rules` object exposes many rule factories, for example:
 - `rules.name(field)` — basic name validation using Unicode letters.
 - `rules.ipAndHostname(field)` — validate IPv4 or hostname (and localhost).
 - `rules.title` / `rules.description` — length-limited string validators.
+- `rules.taxNumber(field)` — basic alphanumeric tax number (3–20 chars).
+- `rules.commercialRegistryNo(field)` — alphanumeric registry number (3–20 chars).
+- `rules.commercialChamberNo(field)` — alphanumeric chamber number (3–20 chars).
+- `rules.commercialNo(field)` — general commercial number (3–20 chars).
+- `rules.branchNo(field)` — exactly 3 digits.
+- `rules.accountNo(field)` — exactly 15 digits.
+- `rules.accountClass(field)` — 3–8 uppercase letters and digits.
+- `rules.iban(field)` / `rules.ibanLibya(field)` — IBAN format (prefix + digits). `iban` expects an uppercase country code and 23 digits; `ibanLibya` validates starting with `LY`.
+- `rules.identificationNumber(field)` — 4–12 uppercase letters/digits.
+- `rules.residencePermitNumber(field)` — 3–25 uppercase letters/digits.
+- `rules.identificationOnlyNumber(field)` — 4–12 digits only.
+- `rules.licenseNo(field)` — 3–20 alphanumeric.
+- `rules.nationalIdNumber(field)` — Libya-specific national ID pattern (starts with 1 or 2, followed by 19 and 9 digits — consult the source for exact semantics).
+- `rules.employeeNumber(field)` — 3–10 digits.
+- `rules.confirmPassword(field, password)` — checks equality with a provided password value.
+- `rules.entityNameEn(field)` / `rules.entityNameAr(field)` — English/Arabic entity name validators.
+- `rules.onlyArabic(field)` / `rules.onlyEnglish(field)` — language-restricted validators.
+- `rules.passportNo(field)` / `rules.identityNumber(field)` — passport and identity number validators.
+
+These are all small, focused validators returning `true` for valid values or an error string when invalid.
 
 See the source (`index.ts`) for precise behavior and available options.
 
@@ -135,6 +155,48 @@ export default Vue.extend({
 ## Types
 
 This package is written in TypeScript and ships types. Importing in TypeScript projects will provide type hints for `Rule`, `RulesList`, `createValidator`, and the `Input` helpers.
+
+## Localization / translations
+
+`rules-js-kt` supports a simple localization hook so you can provide your own translation function for error messages. By default, the library uses an identity function that returns messages as written in English. To replace it, import and call `setTranslationFunction` with a function that accepts a phrase and returns the translated version.
+
+Example:
+
+```vue
+<template>
+ <!-- your app -->
+</template>
+<script lang="ts">
+import {useLocale} from "vuetify"
+import {setTranslationFunction} from "rules-js-kt"
+const {t} = useLocale(); 
+watch([()=>t], ([t])=>{
+  setTranslationFunction(t)
+}, {
+ immediate: true
+})
+
+</script>
+
+
+```
+
+```tsx
+import { setTranslationFunction, rules } from 'rules-js-kt';
+const App = ()=>{
+ const {t} = useI18n(); 
+ 
+ useEffect(()=>{
+    setTranslationFunction(t)
+
+  // now the error messages will appear translated if translation found
+ }, [t])
+ 
+ return <>
+  {/* your app */}
+ </>
+}
+```
 
 ## Contributing
 

@@ -1,0 +1,38 @@
+{
+  "name": "rules-js-kt",
+  "version": "1.0.0",
+  "description": "A tiny TypeScript library of validator rule factories for forms — returns `true` for valid values or an error string for invalid values.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "index.ts",
+  "files": [
+    "dist",
+    "index.ts"
+  ],
+  "type": "module",
+  "keywords": [
+    "validation",
+    "validators",
+    "forms",
+    "vuetify",
+    "react-native",
+    "typescript",
+    "rules"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/almoatamed/rules-js-kt.git"
+  },
+  "author": "Salem Elmotamed s.elmotamed96@gmail.com",
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
